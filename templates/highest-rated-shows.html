@@ -2,37 +2,37 @@
 {% block title %}Shows{% endblock %}
 {% block head %}<h1 class="title text-center">Shows page</h1>{% endblock %}
 {% block nav %}
- <nav class="breadcrumb">
-     <a href="/">Main</a>
-     <span class="separator">&gt;</span>
-     <a href="/shows/most-rated/">Shows</a>
- </nav>
+    <nav class="breadcrumb">
+        <a href="/">Main</a>
+        <span class="separator">&gt;</span>
+        <a href="/shows/most-rated/">Shows</a>
+    </nav>
 {% endblock %}
 
 {% block content %}
     <div class="card">
-            <table class="details card">
-                <thead>
+        <table class="details card">
+            <thead>
 
-                </thead>
-                <tbody>
+            </thead>
+            <tbody>
 
-                </tbody>
-            </table>
-            <div class="buttons text-center">
-                <a type="button" class="previous" id="prev_button"
+            </tbody>
+        </table>
+        <div class="buttons text-center">
+            <a type="button" class="previous" id="prev_button"
                     {% if page_number == 1 %} href="#"
                     {% else %} href="{{ page_number - 1 }}"
                     {% endif %}>&laquo;</a>
-                    {% for i in range(shown_pages_start, shown_pages_end + 1) %}
-                        <a href="{{ i }}" {% if page_number == i %} class="active" {% endif %}>{{ i }}</a>
-                    {% endfor %}
-                <a type="button" class="next" id="next_button"
+            {% for i in range(shown_pages_start, shown_pages_end + 1) %}
+                <a href="{{ i }}" {% if page_number == i %} class="active" {% endif %}>{{ i }}</a>
+            {% endfor %}
+            <a type="button" class="next" id="next_button"
                     {% if page_number == pages_count %} href="#"
                     {% else %} href="{{ page_number + 1 }}"
                     {% endif %}>&raquo;</a>
-            </div>
         </div>
+    </div>
 {% endblock %}
 
 {% block  script %}

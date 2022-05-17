@@ -21,8 +21,8 @@ class Pagination {
     }
 
     loadActualShows() {
-        let begin = ((this.currentPage -1) * this.numberPerPage);
-        let end  = begin + this.numberPerPage;
+        let begin = ((this.currentPage - 1) * this.numberPerPage);
+        let end = begin + this.numberPerPage;
         return this.shows.slice(begin, end);
     }
 
@@ -38,11 +38,11 @@ class Pagination {
         const tableRow = document.createElement('tr');
         for (let header of headers) {
             const headerCell = document.createElement('th');
-            if (sortableColumns.includes(header)){
+            if (sortableColumns.includes(header)) {
                 headerCell.classList.add('sortable');
                 headerCell.innerHTML = header;
                 tableRow.appendChild(headerCell);
-            }else {
+            } else {
                 headerCell.innerHTML = header;
                 tableRow.appendChild(headerCell);
             }
@@ -66,7 +66,7 @@ class Pagination {
                     <td>No URL</td>`}`;
             tableBody.appendChild(tableRow);
         }
-        this.check();
+    this.check();
     }
 
     bblSort(arr, event) {

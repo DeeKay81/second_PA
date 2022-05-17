@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% block title %}Ratings{% endblock %}
+{% block head %}<h1 class="title text-center">Show ratings</h1>{% endblock %}
+{% block nav %}
+    <nav class="breadcrumb">
+        <a href="/">Main</a>
+        <span class="separator">&gt;</span>
+        <a href="/ratings">Ratings</a>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="shows-rating">
+        <table>
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Rating</th>
+            </tr>
+            </thead>
+            <tbody class="text-center">
+            {% for show in shows %}
+                <tr>
+                    <td>{{ show.title }}</td>
+                    <td>{{ show.rating }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

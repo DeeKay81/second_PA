@@ -10,7 +10,7 @@ async function initStart() {
     pagination.initPagination();
 }
 
-async function loadShows(){
+async function loadShows() {
     return await dataHandler.getMostRatedShows();
 }
 
