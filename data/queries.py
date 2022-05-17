@@ -72,4 +72,12 @@ def get_show_count():
 
 
 def get_hundred_actors():
-    return None
+    return data_manager.execute_select(sql.SQL(
+        """
+        SELECT a.name, string_agg(DISTINCT s.title, '#') AS titles, COUNT(*) as show_numbers 
+        FROM actors a 
+        JOIN show_characters sc on a.id = sc.actor_id 
+        JOIN shows s on sc.show_id = s.id 
+        GROUP BY a.name 
+        ORDER BY show_numbers DESC 
+        LIMIT 100;"""))

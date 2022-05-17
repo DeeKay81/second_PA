@@ -1,10 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'layout.html' %}
+{% block title %}Actors{% endblock %}
+{% block head %}<h1 class="title text-center">List of actors</h1>
+{% endblock %}
+{% block nav %}
+     <nav class="breadcrumb">
+         <a href="/">Main</a>
+         <span class="separator">&gt;</span>
+         <a href="/actors">Actors</a>
+     </nav>
+{% endblock %}
 
-</body>
-</html>
+{% block content %}
+    {% for actor in actors %}
+    <ul>
+        <li>
+            <p class="actor">{{ actor['name'] }}</p>
+
+            <ol class="hidden">
+
+                    {% for show in actor['titles'].split('#') %}
+                    <li>{{  show  }}</li>
+                    {% endfor %}
+            </ol>
+        </li>
+    </ul>
+    {% endfor %}
+{% endblock %}
