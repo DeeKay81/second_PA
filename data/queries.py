@@ -1,10 +1,10 @@
 from psycopg import sql
 
-from data import data_manager
+from data import data_manager as dm
 
 
 def get_shows():
-    return data_manager.execute_select(sql.SQL(
+    return dm.execute_select(sql.SQL(
         """
         SELECT id, title
         FROM shows
@@ -12,7 +12,7 @@ def get_shows():
 
 
 def get_fifteen_highest_rated_shows():
-    return data_manager.execute_select(sql.SQL(
+    return dm.execute_select(sql.SQL(
         """
         SELECT shows.id,
         shows.title,
@@ -32,7 +32,7 @@ def get_fifteen_highest_rated_shows():
 
 
 def get_show_details(show_id):
-    return data_manager.execute_select(sql.SQL(
+    return dm.execute_select(sql.SQL(
         """
         SELECT shows.id, 
         shows.title, 
@@ -54,7 +54,7 @@ def get_show_details(show_id):
 
 
 def get_seasons(show_id):
-    return data_manager.execute_select(sql.SQL(
+    return dm.execute_select(sql.SQL(
         """
         SELECT seasons.season_number, seasons.title, COALESCE(seasons.overview, '') as overview
         FROM seasons
@@ -65,7 +65,7 @@ def get_seasons(show_id):
 
 
 def get_show_count():
-    return data_manager.execute_select(sql.SQL(
+    return dm.execute_select(sql.SQL(
         """
         SELECT COUNT(*)
         FROM shows
@@ -73,7 +73,7 @@ def get_show_count():
 
 
 def get_hundred_actors():
-    return data_manager.execute_select(sql.SQL(
+    return dm.execute_select(sql.SQL(
         """
         SELECT REGEXP_REPLACE(actors.name, '\s+\S+$', '') AS firstname
         FROM actors
@@ -85,7 +85,7 @@ def get_hundred_actors():
 def get_shows_by_actor_name(name):
     name = name + '%'
     print(name)
-    return data_manager.execute_select(sql.SQL(
+    return dm.execute_select(sql.SQL(
         """
         SELECT string_agg(shows.title, '  |  ') AS title
         FROM shows
@@ -93,3 +93,21 @@ def get_shows_by_actor_name(name):
         JOIN actors on show_characters.actor_id = actors.id
         WHERE actors.name LIKE {firstname}
         """).format(firstname=sql.Literal(name)))
+
+
+def get_genres_by_limit():
+    return dm.execute_select(sql.SQL(
+        """
+        Select g.name,s.title,
+       ROUND(s.rating::numeric,1) as rating,
+       DATE_PART('year', s.year::date) as year,
+       count(a.name) as actor_count
+    FROM genres g
+    JOIN show_genres sg on g.id = sg.genre_id
+    JOIN shows s on s.id = sg.show_id
+    JOIN show_characters sc on s.id = sc.show_id
+    JOIN actors a on a.id = sc.actor_id
+    GROUP BY g.id, s.id
+    HAVING count(a.name)  < 20;
+        """
+    ))
