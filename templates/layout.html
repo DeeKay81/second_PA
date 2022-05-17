@@ -54,11 +54,12 @@
             {% endif %}
         </div>
     </header>
-
+    <section>
+    {% block nav %}{% endblock %}
     {% block head %}{% endblock %}
     {% block content %}{% endblock %}
     {% block script %}{% endblock %}
-
+    </section>
     <footer>
         Copyright, May 2022
     </footer>

@@ -71,6 +71,13 @@ def display_show_details(show_id):
                            seasons=seasons)
 
 
+@app.route('/actors')
+def display_hundred_actors():
+    actors = queries.get_hundred_actors()
+    return render_template('list-actors.html',
+                           actors=actors)
+
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     return render_template("register.html")

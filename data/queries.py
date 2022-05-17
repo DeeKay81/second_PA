@@ -69,3 +69,7 @@ def get_show_count():
         SELECT COUNT(*)
         FROM shows
         """))
+
+
+def get_hundred_actors():
+    return None

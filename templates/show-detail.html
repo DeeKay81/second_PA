@@ -1,6 +1,15 @@
 {% extends 'layout.html' %}
 {% block title %}Show details{% endblock %}
 {% block head %}<h1 class="title text-center">Show details</h1>{% endblock %}
+{% block nav %}
+     <nav class="breadcrumb">
+         <a href="/">Main</a>
+         <span class="separator">&gt;</span>
+         <a href="/shows/most-rated/">Shows</a>
+         <span class="separator">&gt;</span>
+         <a href="/show/{{ details.id }}">{{ details.title }}</a>
+     </nav>
+{% endblock %}
 
 {% block content %}
     <div class="card detailed-view">

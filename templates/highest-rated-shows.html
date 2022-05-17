@@ -1,6 +1,13 @@
 {% extends 'layout.html' %}
 {% block title %}Shows{% endblock %}
 {% block head %}<h1 class="title text-center">Shows page</h1>{% endblock %}
+{% block nav %}
+     <nav class="breadcrumb">
+         <a href="/">Main</a>
+         <span class="separator">&gt;</span>
+         <a href="/shows/most-rated/">Shows</a>
+     </nav>
+{% endblock %}
 
 {% block content %}
     <div class="card">
@@ -27,6 +34,7 @@
             </div>
         </div>
 {% endblock %}
+
 {% block  script %}
     <script src="/static/js/sorting.js"></script>
     <script type="module" src="/static/js/pagination.js" defer></script>
