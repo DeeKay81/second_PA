@@ -11,18 +11,33 @@
 {% endblock %}
 
 {% block content %}
-    {% for actor in actors %}
-    <ul>
-        <li>
-            <p class="actor">{{ actor['name'] }}</p>
+    <div class="popup hidden">
+        <div class="popup-head">
+            <h3>Shows</h3>
+            <button class="close-btn">&times</button>
+        </div>
+        <ol class="popup-list"></ol>
+    </div>
+    <div class="card">
+        <table>
+            <thead>
+            <tr>
+                <th>Actors</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for actor in actors %}
+                <tr>
+                    <td class="firstname">
+                        {{ actor.firstname }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
 
-            <ol class="hidden">
-
-                    {% for show in actor['titles'].split('#') %}
-                    <li>{{  show  }}</li>
-                    {% endfor %}
-            </ol>
-        </li>
-    </ul>
-    {% endfor %}
+{% block script %}
+        <script type="module" src="/static/js/actorPopup.js" defer></script>
 {% endblock %}

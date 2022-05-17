@@ -77,6 +77,11 @@ def display_hundred_actors():
     return render_template('list-actors.html',
                            actors=actors)
 
+@app.route('/api/get-shows-by-title/<name>')
+def get_shows_by_the_title(name):
+    shows = jsonify(queries.get_shows_by_actor_name(name))
+    return shows
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():

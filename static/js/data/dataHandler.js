@@ -3,8 +3,8 @@ export let dataHandler={
         return await apiGet("/api/get-most-rated-shows")
     },
 
-    getActors: async function(name){
-        return await apiGet(`/api/get-actors/${name}`)
+    getShowsByTitle: async function(name) {
+        return await apiGet(`/api/get-shows-by-title/${name}`);
     }
 };
 

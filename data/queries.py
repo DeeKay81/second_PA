@@ -20,7 +20,7 @@ def get_fifteen_highest_rated_shows():
         shows.runtime,
         ROUND(shows.rating::numeric, 1) AS rating,
         string_agg(genres.name, ','
-            ORDER BY genres.name ASC) genres,
+            ORDER BY genres.name) genres,
         shows.trailer,
         shows.homepage
         FROM shows
@@ -34,12 +34,12 @@ def get_fifteen_highest_rated_shows():
 def get_show_details(show_id):
     return data_manager.execute_select(sql.SQL(
         """
-        SELECT shows.id,
-        shows.title,
+        SELECT shows.id, 
+        shows.title, 
         shows.runtime,
         shows.trailer,
         ROUND(shows.rating::numeric, 1) rating,
-        string_agg(DISTINCT genres.name, ',' ORDER BY genres.name ASC) genres,
+        string_agg(DISTINCT genres.name, ',' ORDER BY genres.name) genres,
         shows.overview,
         array_to_string((array_agg(DISTINCT actors.name))[1:3], ', ') Actors
         FROM shows
@@ -49,6 +49,7 @@ def get_show_details(show_id):
         JOIN actors on actors.id = show_characters.actor_id
         WHERE shows.id = {show_id}
         GROUP BY shows.id
+        ORDER BY shows.id ASC
         """).format(show_id=sql.Literal(show_id)))
 
 
@@ -74,10 +75,21 @@ def get_show_count():
 def get_hundred_actors():
     return data_manager.execute_select(sql.SQL(
         """
-        SELECT a.name, string_agg(DISTINCT s.title, '#') AS titles, COUNT(*) as show_numbers 
-        FROM actors a 
-        JOIN show_characters sc on a.id = sc.actor_id 
-        JOIN shows s on sc.show_id = s.id 
-        GROUP BY a.name 
-        ORDER BY show_numbers DESC 
-        LIMIT 100;"""))
+        SELECT REGEXP_REPLACE(actors.name, '\s+\S+$', '') AS firstname
+        FROM actors
+        ORDER BY actors.birthday
+        LIMIT 100
+        """))
+
+
+def get_shows_by_actor_name(name):
+    name = name + '%'
+    print(name)
+    return data_manager.execute_select(sql.SQL(
+        """
+        SELECT string_agg(shows.title, '  |  ') AS title
+        FROM shows
+        JOIN show_characters on shows.id = show_characters.show_id
+        JOIN actors on show_characters.actor_id = actors.id
+        WHERE actors.name LIKE {firstname}
+        """).format(firstname=sql.Literal(name)))
