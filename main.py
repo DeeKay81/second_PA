@@ -83,6 +83,27 @@ def get_shows_by_the_title(name):
     return shows
 
 
+@app.route('/api/get-genres')
+def get_genres():
+    return jsonify(queries.get_genres_by_limit())
+
+
+@app.route('/api/get-genres-detail/<int:id>')
+def get_genre_details(genre_id):
+    return jsonify(queries.get_genre_by_limit(genre_id))
+
+
+@app.route('/shows/genres')
+def genre():
+    return render_template('genres.html')
+
+
+@app.route('/shows/genres/<int:id>')
+def genre_detail(id):
+         return render_template('genre_detail.html')
+
+
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     return render_template("register.html")

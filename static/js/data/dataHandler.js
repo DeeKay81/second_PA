@@ -5,6 +5,16 @@ export let dataHandler={
 
     getShowsByTitle: async function(name) {
         return await apiGet(`/api/get-shows-by-title/${name}`);
+    },
+
+    getGenres: async function(){
+        const response = await apiGet("/api/get-genres");
+        return response
+    },
+
+    getGenresDetail: async function(genre_id){
+        const response = await apiGet(`/api/get-genres-detail/${genre_id}`);
+        return response
     }
 };
 

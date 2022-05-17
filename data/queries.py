@@ -98,7 +98,16 @@ def get_shows_by_actor_name(name):
 def get_genres_by_limit():
     return dm.execute_select(sql.SQL(
         """
-        Select g.name,s.title,
+        Select g.id, g.name as genre
+    FROM genres g;
+        """
+    ))
+
+
+def get_genre_by_limit(genre_id):
+    return dm.execute_select(
+        """
+        Select g.id, g.name,s.title,
        ROUND(s.rating::numeric,1) as rating,
        DATE_PART('year', s.year::date) as year,
        count(a.name) as actor_count
@@ -107,7 +116,7 @@ def get_genres_by_limit():
     JOIN shows s on s.id = sg.show_id
     JOIN show_characters sc on s.id = sc.show_id
     JOIN actors a on a.id = sc.actor_id
+    WHERE g.id = %(genre_id)s
     GROUP BY g.id, s.id
     HAVING count(a.name)  < 20;
-        """
-    ))
+    """,{"genre_id": genre_id})
