@@ -65,8 +65,7 @@ def get_show_details(show_id):
 
 
 def get_seasons(show_id):
-    return data_manager.execute_select(sql.SQL(
-        """
+    return data_manager.execute_select(sql.SQL("""
         SELECT seasons.season_number, seasons.title, COALESCE(seasons.overview, '') as overview
         FROM seasons
         JOIN shows on shows.id = seasons.show_id
@@ -86,23 +85,21 @@ def get_show_count():
 def get_hundred_actors():
     return data_manager.execute_select(sql.SQL(
         """
-        SELECT REGEXP_REPLACE(actors.name, '\s+\S+$', '') AS firstname
+        SELECT split_part("name", ' ', 1 ) AS firstname 
         FROM actors
-        ORDER BY actors.birthday
-        LIMIT 100
+        ORDER BY actors.birthday LIMIT 100;
         """))
 
 
-def get_shows_by_actor_name(name):
-    name = name + '%'
+def get_actor_detail(name):
     return data_manager.execute_select(sql.SQL(
         """
         SELECT string_agg(shows.title, ', ') AS title
         FROM shows
         JOIN show_characters on shows.id = show_characters.show_id
         JOIN actors on show_characters.actor_id = actors.id
-        WHERE actors.name LIKE {firstname}
-        """).format(firstname=sql.Literal(name)))
+        WHERE actors.name LIKE (${firstname} + ' %')
+        """).format(first_name=sql.Literal(name)))
 
 
 def get_genres():
@@ -129,6 +126,7 @@ def get_genre_detailed(genre_id):
         GROUP BY g.id, s.id
         HAVING count(a.name)  < 20;
         """, {"genre_id": genre_id})
+
 
 
 def get_shows_by_rating():
