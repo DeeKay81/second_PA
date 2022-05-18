@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends 'main/layout.html' %}
 {% block title %}Genres{% endblock %}
 {% block head %}<h1 class="title text-center">Genres page</h1>{% endblock %}
 {% block nav %}
@@ -15,8 +15,19 @@
 
         </ul>
     </div>
+    <div class="card">
+        <table class="details card">
+            <thead>
+
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
 
 {% block  script %}
     <script type="module" src="/static/js/genres.js" defer></script>
+    <script type="module" src="/static/js/genreDetail.js" defer></script>
 {% endblock %}

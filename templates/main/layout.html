@@ -41,16 +41,35 @@
         <div id="header-auth">
             {% if 'username' in session %}
                 <p>Logged in as <a>{{ username }}</a></p>
-                <button onclick="location.href='/logout'" type="button" id="bt-logout">Logout
-                </button>
+                <button onclick="location.href='/logout'" type="button" id="bt-logout"
+                        style="float: right">
+                    Logout
+                </button><br><br>
             {% else %}
-                <button onclick="location.href='/shows/most-rated'" type="button" id="bt-shows">
-                    Shows
-                </button>
-                <button onclick="location.href='/register'" type="button" id="bt-register">
+                <button onclick="location.href='/login'" type="button" id="bt-login"
+                        style="float: right">
+                    Login
+                </button><br><br>
+                <button onclick="location.href='/register'" type="button" id="bt-register"
+                        style="float: right">
                     Register
+                </button><br><br>
+                <button onclick="location.href='/shows/most-rated'" type="button" id="bt-shows"
+                        style="float: right">
+                    Shows
+                </button><br><br>
+                <button onclick="location.href='/actors'" type="button" id="bt-actors"
+                        style="float: right">
+                    Actors
+                </button><br><br>
+                <button onclick="location.href='/shows/genres'" type="button" id="bt-genres"
+                        style="float: right">
+                    Genres
+                </button><br><br>
+                <button onclick="location.href='/ratings'" type="button" id="bt-ratings"
+                        style="float: right">
+                    Ratings
                 </button>
-                <button onclick="location.href='/login'" type="button" id="bt-login">Login</button>
             {% endif %}
         </div>
     </header>

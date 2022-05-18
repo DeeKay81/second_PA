@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends 'main/layout.html' %}
 {% block title %}Show details{% endblock %}
 {% block head %}<h1 class="title text-center">Show details</h1>{% endblock %}
 {% block nav %}
@@ -28,13 +28,13 @@
                 </p>
                 <p>{{ details.overview }}</p>
                 <p><b>Stars:</b>&nbsp;
-                    {{ details.actors}}
+                    {{ details.actors }}
                 </p>
-
             </div>
             <div class="trailer col col-third">
                 {% if details.trailer %}
-                    <iframe src="{{ details.trailer.replace('watch', 'embed').replace('?v=', '/') + '?autoplay=1&mute=1' }}" allow="autoplay"></iframe>
+                    <iframe src="{{ details.trailer.replace('watch', 'embed').replace('?v=', '/') + '?autoplay=1&mute=1' }}"
+                            allow="autoplay"></iframe>
                 {% endif %}
             </div>
         </div>

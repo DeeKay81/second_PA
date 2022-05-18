@@ -82,24 +82,20 @@ def get_show_count():
         """))
 
 
-def get_hundred_actors():
+def get_actor_detail():
     return data_manager.execute_select(sql.SQL(
         """
-        SELECT split_part("name", ' ', 1 ) AS firstname 
-        FROM actors
-        ORDER BY actors.birthday LIMIT 100;
+        SELECT
+        split_part("name", ' ', 1) AS firstname,
+        array_agg(s.title) shows,
+        a.birthday
+        FROM show_characters sc
+            JOIN actors a ON sc.actor_id = a.id
+            JOIN shows s ON sc.show_id = s.id
+        GROUP BY a.id, a.birthday
+        ORDER BY a.birthday
+        LIMIT 100;
         """))
-
-
-def get_actor_detail(name):
-    return data_manager.execute_select(sql.SQL(
-        """
-        SELECT string_agg(shows.title, ', ') AS title
-        FROM shows
-        JOIN show_characters on shows.id = show_characters.show_id
-        JOIN actors on show_characters.actor_id = actors.id
-        WHERE actors.name LIKE (${firstname} + ' %')
-        """).format(first_name=sql.Literal(name)))
 
 
 def get_genres():
@@ -113,20 +109,19 @@ def get_genres():
 def get_genre_detailed(genre_id):
     return data_manager.execute_select(
         """
-        Select g.id, g.name,s.title,
+        SELECT g.id, g.name as genre, s.title,
         ROUND(s.rating::numeric,1) as rating,
         DATE_PART('year', s.year::date) as year,
-        count(a.name) as actor_count
+        COUNT(a.name) as actor_count
         FROM genres g
         JOIN show_genres sg on g.id = sg.genre_id
         JOIN shows s on s.id = sg.show_id
         JOIN show_characters sc on s.id = sc.show_id
         JOIN actors a on a.id = sc.actor_id
-        WHERE g.id = %(genre_id)s
-        GROUP BY g.id, s.id
+        WHERE g.id = genre_id
+        GROUP BY g.id, s.id, s.rating, g.id
         HAVING count(a.name)  < 20;
         """, {"genre_id": genre_id})
-
 
 
 def get_shows_by_rating():

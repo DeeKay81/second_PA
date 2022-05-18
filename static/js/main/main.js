@@ -1,4 +1,4 @@
-import {dataHandler} from "./data/dataHandler.js";
+import {dataHandler} from "../data/dataHandler.js";
 import {sort} from "./sorting.js"
 
 export {Pagination};
@@ -66,7 +66,7 @@ class Pagination {
                     <td>No URL</td>`}`;
             tableBody.appendChild(tableRow);
         }
-    this.check();
+        this.check();
     }
 
     bblSort(arr, event) {

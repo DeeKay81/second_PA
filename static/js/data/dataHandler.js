@@ -3,18 +3,18 @@ export let dataHandler = {
         return await apiGet("/api/get-most-rated-shows")
     },
 
-    getActors: async function() {
+    getActors: async function () {
         return await apiGet("/api/get-actors")
     },
 
-    getShowsByTitle: async function(name) {
-        return await apiGet(`/api/get-actors-detail/${name}`)
+    getActorsNshows: async function () {
+        return await apiGet("/api/get-actors-detail")
     },
 
-    getGenres: async function(){
+    getGenres: async function () {
         return await apiGet("/api/get-genres")
     },
-    getGenresDetail: async function(genre_id){
+    getGenresDetail: async function (genre_id) {
         return await apiGet(`/api/get-genres-detail/${genre_id}`)
     }
 };

@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends 'main/layout.html' %}
 {% block title %}Actors{% endblock %}
 {% block head %}<h1 class="title text-center">List of actors</h1>
 {% endblock %}
@@ -24,7 +24,7 @@
         </ul>
     </div>
 {% endblock %}
+
 {% block  script %}
     <script type="module" src="/static/js/actors.js" defer></script>
-    <!--script type="module" src="/static/js/actorPopup.js" defer></script-->
 {% endblock %}

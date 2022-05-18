@@ -1,4 +1,4 @@
-import {Pagination} from "/static/js/main.js";
+import {Pagination} from "/static/js/main/main.js";
 import {dataHandler} from "/static/js/data/dataHandler.js";
 
 export {initStart};
