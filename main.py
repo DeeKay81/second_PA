@@ -75,7 +75,6 @@ def display_ordered_shows():
 
 @app.route('/api/get-actors-detail')
 def get_actors_detail():
-    input(queries.get_actor_detail())
     return jsonify(queries.get_actor_detail())
 
 
@@ -101,14 +100,14 @@ def get_genres():
     return jsonify(queries.get_genres())
 
 
-@app.route('/api/get-genres-detail/<int:genre_id>')
-def get_genre_details(genre_id):
-    return jsonify(queries.get_genre_detailed(genre_id))
-
-
 @app.route('/shows/genres')
 def genre():
     return render_template('genres.html')
+
+
+@app.route('/api/get-genres-detail/<int:genre_id>')
+def get_genre_details(genre_id):
+    return jsonify(queries.get_genre_detailed(genre_id))
 
 
 # ratings -------------------------------------------------------------

@@ -1,5 +1,4 @@
 from psycopg import sql
-
 from data import data_manager
 
 
@@ -92,7 +91,7 @@ def get_actor_detail():
         FROM show_characters sc
             JOIN actors a ON sc.actor_id = a.id
             JOIN shows s ON sc.show_id = s.id
-        GROUP BY a.id, a.birthday
+        GROUP BY a.id
         ORDER BY a.birthday
         LIMIT 100;
         """))
@@ -109,17 +108,17 @@ def get_genres():
 def get_genre_detailed(genre_id):
     return data_manager.execute_select(
         """
-        SELECT g.id, g.name as genre, s.title,
+        Select g.id, g.name as genre,s.title,
         ROUND(s.rating::numeric,1) as rating,
         DATE_PART('year', s.year::date) as year,
-        COUNT(a.name) as actor_count
+        count(a.name) as actor_count
         FROM genres g
         JOIN show_genres sg on g.id = sg.genre_id
         JOIN shows s on s.id = sg.show_id
         JOIN show_characters sc on s.id = sc.show_id
         JOIN actors a on a.id = sc.actor_id
-        WHERE g.id = genre_id
-        GROUP BY g.id, s.id, s.rating, g.id
+        WHERE g.id = %(genre_id)s
+        GROUP BY g.id, s.id
         HAVING count(a.name)  < 20;
         """, {"genre_id": genre_id})
 

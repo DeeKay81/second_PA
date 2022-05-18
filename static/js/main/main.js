@@ -1,22 +1,18 @@
-import {dataHandler} from "../data/dataHandler.js";
-import {sort} from "./sorting.js"
+import {sort} from "/static/js/main/sorting.js";
 
-export {Pagination};
+export {mainTable};
 
-class Pagination {
+class mainTable {
     constructor(shows) {
-        this.previousPage = this.previousPage.bind(this);
         this.shows = shows;
         this.currentPage = 1;
         this.numberPerPage = 15;
-        this.numberOfPages = this.getNumberOfPages();
         this.currentShows = this.loadActualShows();
     }
 
-    initPagination() {
+    initTable() {
         this.createTableHeader();
         this.createTableBody();
-        this.addEventOnButtons();
         this.addEventOnColumn();
     }
 
@@ -24,11 +20,6 @@ class Pagination {
         let begin = ((this.currentPage - 1) * this.numberPerPage);
         let end = begin + this.numberPerPage;
         return this.shows.slice(begin, end);
-    }
-
-    async getNumberOfPages() {
-        const showsData = await dataHandler.getMostRatedShows();
-        return Math.ceil(showsData.length / this.numberPerPage);
     }
 
     createTableHeader() {
@@ -66,12 +57,10 @@ class Pagination {
                     <td>No URL</td>`}`;
             tableBody.appendChild(tableRow);
         }
-        this.check();
     }
 
     bblSort(arr, event) {
         const column = event.currentTarget;
-        /*Mit queryselctor all abfragen welche class auf sortable desc or asc gesetzt ist und remove*/
         const columnName = column.innerText.toLowerCase();
         if (column.classList.contains('desc')) {
             sort(arr, columnName, 'asc');
@@ -94,32 +83,6 @@ class Pagination {
             this.removeTableBodyChildren(tableBodyChildren);
             this.createTableBody();
         }));
-    }
-
-    check() {
-        document.querySelector(".next").disabled = this.currentPage === this.numberOfPages;
-        document.querySelector(".previous").disabled = this.currentPage === 1;
-    }
-
-    nextPage = () => {
-        this.currentPage += 1;
-        const tableBodyChildren = document.querySelectorAll('tbody tr');
-        this.removeTableBodyChildren(tableBodyChildren);
-        this.currentShows = this.loadActualShows();
-        this.createTableBody();
-    };
-
-    previousPage() {
-        this.currentPage -= 1;
-        const tableBodyChildren = document.querySelectorAll('tbody tr');
-        this.removeTableBodyChildren(tableBodyChildren);
-        this.currentShows = this.loadActualShows();
-        this.createTableBody();
-    }
-
-    addEventOnButtons() {
-        document.querySelector(".next").addEventListener('click', this.nextPage);
-        document.querySelector(".previous").addEventListener('click', this.previousPage);
     }
 
     removeTableBodyChildren(parent) {
