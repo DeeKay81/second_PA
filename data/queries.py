@@ -82,15 +82,6 @@ def get_show_count():
         """))
 
 
-def get_hundred_actors():
-    return data_manager.execute_select(sql.SQL(
-        """
-        SELECT split_part("name", ' ', 1 ) AS firstname 
-        FROM actors
-        ORDER BY actors.birthday LIMIT 100;
-        """))
-
-
 def get_actor_detail():
     return data_manager.execute_select(sql.SQL(
         """
@@ -118,7 +109,7 @@ def get_genres():
 def get_genre_detailed(genre_id):
     return data_manager.execute_select(
         """
-        Select g.id, g.name,s.title,
+        Select g.id, g.name as genre,s.title,
         ROUND(s.rating::numeric,1) as rating,
         DATE_PART('year', s.year::date) as year,
         count(a.name) as actor_count

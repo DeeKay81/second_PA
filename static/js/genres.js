@@ -1,5 +1,5 @@
-import {dataHandler} from "/static/js/data/dataHandler.js";
-import {createTable} from "/static/js/genreDetail.js";
+import {dataHandler} from "./data/dataHandler.js";
+import {createTable} from "./genreDetail.js";
 
 const allData = await dataHandler.getGenres();
 
@@ -9,10 +9,15 @@ async function getAllData() {
     for (let genre of allData) {
         const li = document.createElement('li')
         console.log(genre)
-        li.innerHTML=`<a href="${'/shows/genres/' + (genre["id"])}" onclick="createTable(${genre.id})">${genre["genre"]}</a>`;
+        li.innerHTML=`${genre["genre"]}`;
+        li.addEventListener("click", ev => {
+            createTable(genre.id)
+        })
         card.appendChild(li);
     }
 
 }
 
-getAllData();
+getAllData()
+
+

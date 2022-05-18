@@ -91,18 +91,12 @@ def display_hundred_actor(name):
     return render_template('list-actors.html')
 
 
-@app.route('/api/get-shows-by-title/<name>')
-def get_shows_by_the_title(name):
-    shows = jsonify(queries.get_actor_detail(name))
-    return shows
-
-
 @app.route('/api/get-genres')
 def get_genres():
     return jsonify(queries.get_genres())
 
 
-@app.route('/api/get-genres-detail/<int:id>')
+@app.route('/api/get-genres-detail/<int:genre_id>')
 def get_genre_details(genre_id):
     return jsonify(queries.get_genre_detailed(genre_id))
 
@@ -110,13 +104,6 @@ def get_genre_details(genre_id):
 @app.route('/shows/genres')
 def genre():
     return render_template('genres.html')
-
-
-@app.route('/shows/genres/<int:genre_id>')
-def genre_detail(genre_id):
-    genre_details = queries.get_genre_detailed(genre_id)
-    return render_template('genre-detail.html',
-                           genres=genre_details)
 
 
 @app.route('/ratings')

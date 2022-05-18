@@ -1,7 +1,7 @@
-import {dataHandler} from "/static/js/data/dataHandler.js";
+import {dataHandler} from "./data/dataHandler.js";
+
 
 export async function createTable(genre_id) {
-     console.log('I am here')
      const allData = await getData(genre_id)
      createTableHeader()
      await createTableBody(allData)
@@ -13,8 +13,8 @@ function createTableHeader() {
         const tableRow = document.createElement('tr');
         for (let header of headers) {
             const headerCell = document.createElement('th');
-            headerCell.innerHTML = header;
-            tableRow.appendChild(headerCell);
+                headerCell.innerHTML = header;
+                tableRow.appendChild(headerCell);
         }
         tableHead.appendChild(tableRow);
     }
@@ -33,5 +33,7 @@ async function createTableBody(allData) {
 }
 
 async function getData(genre_id){
-    return await dataHandler.getGenresDetail(genre_id)
+    const allData = await dataHandler.getGenresDetail(genre_id);
+    console.log(allData);
+    return allData
 }

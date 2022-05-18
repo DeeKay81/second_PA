@@ -8,15 +8,24 @@
         <a href="/shows/genres">Genres</a>
     </nav>
 {% endblock %}
-
 {% block content %}
     <div class="table_">
         <ul>
 
         </ul>
     </div>
-{% endblock %}
+    <div class="card">
+            <table class="details card">
+                <thead>
 
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+    </div>
+{% endblock %}
 {% block  script %}
-    <script type="module" src="/static/js/genres.js" defer></script>
+    <script type="module" src="{{ url_for('static', filename='js/genres.js') }}" defer></script>
+    <script type="module" src="{{ url_for('static', filename='js/genreDetail.js') }}" defer></script>
 {% endblock %}
