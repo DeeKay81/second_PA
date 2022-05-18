@@ -18,26 +18,12 @@
         </div>
         <p class="popup-list"></p>
     </div>
-    <div class="card">
-        <table>
-            <thead>
-            <tr>
-                <th>Actors</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for actor in actors %}
-                <tr>
-                    <td class="firstname">
-                        {{ actor.firstname }}
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+    <div class="table_">
+        <ul class="actors">
+
+        </ul>
     </div>
 {% endblock %}
-
-{% block script %}
-    <script type="module" src="/static/js/actorPopup.js" defer></script>
+{% block  script %}
+    <script type="module" src="/static/js/actors.js" defer></script>
 {% endblock %}

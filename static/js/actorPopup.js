@@ -1,4 +1,6 @@
-import {dataHandler} from "/static/js/data/dataHandler.js";
+/*import {dataHandler} from "/static/js/data/dataHandler.js";
+
+export {initPopup}
 
 class popupWindow {
     constructor() {
@@ -13,7 +15,7 @@ class popupWindow {
         const popupDiv = document.querySelector('.popup');
         const closeButton = document.querySelector('.close-btn');
         const listItems = document.querySelectorAll('li');
-        const cardDiv = document.querySelector('.card');
+        const cardDiv = document.querySelector('.table_');
         closeButton.addEventListener('click', () => {
             listItems.forEach(listItem => listItem.remove());
             cardDiv.classList.remove('visibility');
@@ -24,10 +26,13 @@ class popupWindow {
 
     addEventOnAllFirstname() {
         const popupDiv = document.querySelector('.popup');
-        const firstnames = document.querySelectorAll('.firstname');
-        const cardDiv = document.querySelector('.card');
+        const cardDiv = document.querySelector('.table_');
+        const actors = document.querySelector('ul')
+        const firstnams = actors.children
+        console.log(firstnams.item(0))
         firstnames.forEach(firstname => firstname.addEventListener('click', async (event) => {
             const shows = await dataHandler.getShowsByTitle(event.currentTarget.innerText);
+            console.log(shows)
             if (this.popupWindowUp === false) {
                 this.popupWindowUp = true;
                 cardDiv.classList.add('visibility');
@@ -58,4 +63,4 @@ function initPopup() {
     popup.init();
 }
 
-initPopup();
+initPopup();*/

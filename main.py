@@ -1,5 +1,3 @@
-# detail-view: trailer, actors
-
 import math
 
 from dotenv import load_dotenv
@@ -25,7 +23,7 @@ def design():
     """
     See how it should look like ;-)
     """
-    return render_template('design.html')
+    return render_template('main/design.html')
 
 
 @app.route('/api/get-most-rated-shows')
@@ -73,16 +71,29 @@ def display_show_details(show_id):
                            seasons=seasons)
 
 
+@app.route('/api/get-actors')
+def get_actors():
+    return jsonify(queries.get_hundred_actors())
+
+
+@app.route('/api/get-actors-detail')
+def get_actors_detail():
+    return jsonify(queries.get_actor_detail())
+
+
 @app.route('/actors')
 def display_hundred_actors():
-    actors = queries.get_hundred_actors()
-    return render_template('list-actors.html',
-                           actors=actors)
+    return render_template('list-actors.html')
+
+
+@app.route('/actors/<name>')
+def display_hundred_actor(name):
+    return render_template('list-actors.html')
 
 
 @app.route('/api/get-shows-by-title/<name>')
 def get_shows_by_the_title(name):
-    shows = jsonify(queries.get_shows_by_actor_name(name))
+    shows = jsonify(queries.get_actor_detail(name))
     return shows
 
 
@@ -111,8 +122,23 @@ def genre_detail(genre_id):
 @app.route('/ratings')
 def display_ratings():
     shows = queries.get_shows_by_rating()
-    return render_template('show-ratings.html',
+    return render_template('ratings.html',
                            shows=shows)
+
+
+@app.route('/ordered-shows')
+def display_ordered_shows():
+    return render_template('ordered-shows.html')
+
+
+@app.route('/filter-actors')
+def display_filter_actors():
+    return render_template('filter-actors.html')
+
+
+@app.route('/birthday-actors')
+def display_birthday_actors():
+    return render_template('birthday-actors.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])
