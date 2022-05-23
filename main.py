@@ -26,6 +26,17 @@ def design():
     return render_template('main/design.html')
 
 
+@app.route('/api/get-trailer/<show_id>')
+def get_characters(show_id):
+    return jsonify(queries.get_trailer(show_id))
+
+
+@app.route('/tv-show/<int:show_id>')
+def display_details(show_id):
+    details = queries.get_details(show_id)
+    return render_template('list_character.html', details=details, show_id=show_id)
+
+
 @app.route('/api/get-most-rated-shows')
 def most_rated_shows():
     return jsonify(queries.get_fifteen_highest_rated_shows())

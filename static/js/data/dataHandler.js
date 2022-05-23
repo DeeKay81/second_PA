@@ -16,6 +16,10 @@ export let dataHandler = {
     },
     getGenresDetail: async function(genre_id){
         return await apiGet(`/api/get-genres-detail/${genre_id}`)
+    },
+
+    getTrailer: async function(show_id) {
+        return await apiGet(`/api/get-trailer/${show_id}`)
     }
 };
 

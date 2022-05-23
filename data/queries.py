@@ -124,7 +124,6 @@ def get_genre_detailed(genre_id):
         """, {"genre_id": genre_id})
 
 
-
 def get_shows_by_rating():
     return data_manager.execute_select(sql.SQL(
         """
@@ -136,3 +135,22 @@ def get_shows_by_rating():
         ORDER BY COUNT(episodes.id)
         LIMIT 10;
         """))
+
+
+def get_details(show_id):
+    return data_manager.execute_select(sql.SQL("""
+        SELECT sc.character_name as character_name,
+       a.name as actor_name,
+       s.id,
+       date_part('year',age(a.birthday)) as age
+        FROM show_characters sc
+        JOIN actors a on a.id = sc.actor_id
+        JOIN shows s on s.id = sc.show_id
+        WHERE s.id = {show_id}
+    """).format(show_id=sql.Literal(show_id)))
+
+
+def get_trailer(show_id):
+    return data_manager.execute_select(sql.SQL("""
+    SELECT s.trailer FROM shows s WHERE s.id ={show_id}
+    """).format(show_id=sql.Literal(show_id)), None, False)
