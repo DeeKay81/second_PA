@@ -1,0 +1,70 @@
+{% extends 'main/layout.html' %}
+{% block title %}Shows{% endblock %}
+{% block head %}<h1 class="title text-center">Shows page</h1>{% endblock %}
+{% block nav %}
+    <nav class="breadcrumb">
+        <a href="/static">Main</a>
+        <span class="separator">&gt;</span>
+        <a href="/get-all-shows/">Shows List</a>
+        <span class="separator">&gt;</span>
+        <a href="/get-shows/table/">Shows Table</a>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <section>
+        <div class="card">
+            <table>
+                <thead>
+                <tr>
+                    <th>Title
+                        <a href="{{ url_for('display_all_shows_table', header='title', order='desc') }}"><button class="sort_button">v</button></a>
+                        <a href="{{ url_for('display_all_shows_table', header='title', order='asc') }}"><button class="sort_button">^</button></a>
+                    </th>
+                    <th>Year
+                        <a href="{{ url_for('display_all_shows_table', header='title', order='desc') }}"><button class="sort_button">v</button></a>
+                        <a href="{{ url_for('display_all_shows_table', header='title', order='asc') }}"><button class="sort_button">^</button></a>
+                    </th>
+                    <th>Runtime
+                        <a href="{{ url_for('display_all_shows_table', header='title', order='desc') }}"><button class="sort_button">v</button></a>
+                        <a href="{{ url_for('display_all_shows_table', header='title', order='asc') }}"><button class="sort_button">^</button></a>
+                    </th>
+                    <th>Rating
+                        <a href="{{ url_for('display_all_shows_table', header='title', order='desc') }}"><button class="sort_button">v</button></a>
+                        <a href="{{ url_for('display_all_shows_table', header='title', order='asc') }}"><button class="sort_button">^</button></a>
+                    </th>
+                    <th>Genres</th>
+                    <th>Trailer</th>
+                    <th>Homepage</th>
+                    <th class="action-column">Edit / Delete</th>
+                </tr>
+                </thead>
+                <tbody class="text-center">
+                {% for show in shows %}
+                    <tr>
+                        <td><a href="/show/{{ show.id }}">{{ show.title }}</a></td>
+                        <td>{{ show.year }}</td>
+                        <td>{{ show.runtime }}</td>
+                        <td>{{ show.rating|string }}</td>
+                        <td>{{ show.genres }}</td>
+                    {% if show.trailer %}
+                        <td><a href="{{ show.trailer }}">link</a></td>
+                    {% else %}
+                        <td>No URL</td>
+                    {% endif %}
+                    {% if show.homepage  %}
+                        <td><a href="{{ show.homepage }}">link</a></td>
+                    {% else %}
+                        <td>No URL</td>
+                    {% endif %}
+                        <td class="action-column">
+                            <button type="button" class="icon-button"><i class="fa fa-edit fa-fw"></i></button>
+                            <button type="button" class="icon-button"><i class="fa fa-trash fa-fw"></i></button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+{% endblock %}

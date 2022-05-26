@@ -1,0 +1,24 @@
+{% extends 'main/layout.html' %}
+{% block title %}Genres{% endblock %}
+{% block head %}<h1 class="title text-center">Genres page</h1>{% endblock %}
+{% block nav %}
+    <nav class="breadcrumb">
+        <a href="/static">Main</a>
+        <span class="separator">&gt;</span>
+        <a href="/get-all-genres/">Genres</a>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <section>
+        <div class="card">
+            <ul>
+                {% for genre in genres %}
+                    <li>
+                        <a href="/genre/{{ genre.id }}">{{ genre.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endblock %}

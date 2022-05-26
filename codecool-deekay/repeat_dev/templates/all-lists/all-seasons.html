@@ -1,0 +1,26 @@
+{% extends 'main/layout.html' %}
+{% block title %}Seasons{% endblock %}
+{% block head %}<h1 class="title text-center">Seasons page</h1>{% endblock %}
+{% block nav %}
+    <nav class="breadcrumb">
+        <a href="/static">Main</a>
+        <span class="separator">&gt;</span>
+        <a href="/get-all-seasons/">Seasons List</a>
+        <span class="separator">&gt;</span>
+        <a href="/get-seasons/table/">Seasons Table</a>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <section>
+        <div class="card">
+            <ul>
+                {% for season in seasons %}
+                    <li>
+                        <a href="/season/{{ season.id }}">{{ season.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endblock %}

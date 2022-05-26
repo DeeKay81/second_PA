@@ -1,0 +1,47 @@
+{% extends 'main/layout.html' %}
+{% block title %}Shows{% endblock %}
+{% block head %}<h1 class="title text-center">Shows page</h1>{% endblock %}
+{% block nav %}
+    <nav class="breadcrumb">
+        <a href="/static">Main</a>
+        <span class="separator">&gt;</span>
+        <a href="/get-all-seasons/">Seasons List</a>
+        <span class="separator">&gt;</span>
+        <a href="/get-seasons/table/">Seasons Table</a>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <section>
+        <div class="card">
+            <table class="text-center">
+                <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Title
+                        <a href="{{ url_for('display_all_shows_table', header='title', order='desc') }}"><button class="sort_button">v</button></a>
+                        <a href="{{ url_for('display_all_shows_table', header='title', order='asc') }}"><button class="sort_button">^</button></a>
+                    </th>
+                    <th>Overview</th>
+                    <th>Show</th>
+                    <th class="action-column">Edit / Delete</th>
+                </tr>
+                </thead>
+                <tbody class="text-center">
+                {% for season in seasons %}
+                    <tr>
+                        <td>{{ season.season_number }}</td>
+                        <td>{{ season.season_title }}</td>
+                        <td>{{ season.overview }}</td>
+                        <td>{{ season.show_title }}</td>
+                        <td class="action-column">
+                            <button type="button" class="icon-button"><i class="fa fa-edit fa-fw"></i></button>
+                            <button type="button" class="icon-button"><i class="fa fa-trash fa-fw"></i></button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+{% endblock %}

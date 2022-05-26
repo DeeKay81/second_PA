@@ -1,0 +1,26 @@
+{% extends 'main/layout.html' %}
+{% block title %}Shows{% endblock %}
+{% block head %}<h1 class="title text-center">Shows page</h1>{% endblock %}
+{% block nav %}
+    <nav class="breadcrumb">
+        <a href="/static">Main</a>
+        <span class="separator">&gt;</span>
+        <a href="/get-all-shows/">Shows List</a>
+        <span class="separator">&gt;</span>
+        <a href="/get-shows/table/">Shows Table</a>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <section>
+        <div class="card">
+            <ul>
+                {% for show in shows %}
+                    <li>
+                        <a href="/show/{{ show.id }}">{{ show.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endblock %}

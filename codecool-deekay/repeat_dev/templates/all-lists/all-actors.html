@@ -1,0 +1,24 @@
+{% extends 'main/layout.html' %}
+{% block title %}Actors{% endblock %}
+{% block head %}<h1 class="title text-center">Actors page</h1>{% endblock %}
+{% block nav %}
+    <nav class="breadcrumb">
+        <a href="/static">Main</a>
+        <span class="separator">&gt;</span>
+        <a href="/get-all-actors/">Actors</a>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <section>
+        <div class="card">
+            <ul>
+                {% for actor in actors %}
+                    <li>
+                        <a href="/actor/{{ actor.id }}">{{ actor.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endblock %}

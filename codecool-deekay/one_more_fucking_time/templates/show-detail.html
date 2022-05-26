@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+{% block title %}Show details{% endblock %}
+{% block head %}<h1 class="title text-center">Show details</h1>{% endblock %}
+
+{% block content %}
+    <div class="card detailed-view">
+        <div class="row">
+            {% if details.trailer %}
+                <script type="text/javascript">
+                    let videoId = '{{ details.trailer_id }}';
+                </script>
+            {% endif %}
+            <script type="text/javascript" src="/static/js/embed-youtube.js"></script>
+            <div class="col col-twothird">
+                <h2>{{ details.title }}</h2>
+                <p class="small grayed">{{ details.runtime }}<span
+                        class="separator">|</span> {{ details.rating }}
+                    &#9734; <span class="separator">|</span>{{ details.genres }}</p>
+                <p>{{ details.overview }}</p>
+                <p><b>Stars:</b>&nbsp;
+                    {{ details.actors[0] }},
+                    {{ details.actors[1] }}&#8203;
+                    {% if details.actors[2] in details.actors %}
+                        , {{ details.actors[2] }}
+                    {% endif %}
+                </p>
+            </div>
+            {% if details.trailer %}
+                <div class="col col-third" id="player" data-trailer="{{ details.trailer }}"></div>
+            {% endif %}
+            <div class="col col-third" id="player" data-trailer="{{ details.trailer }}"></div>
+        </div>
+        <div class="card">
+            <h2>Seasons</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Overview</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for season in seasons %}
+                    <tr>
+                        <td class="text-center">{{ season.season_num }}</td>
+                        <td class="text-center">{{ season.title }}</td>
+                        {% if season.overview %}
+                            <td>{{ season.overview }}</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
