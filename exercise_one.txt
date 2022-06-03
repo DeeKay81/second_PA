@@ -1,5 +1,0 @@
-# Write all genres next to each other
-# Clicking on the genre load shows with that genre that has less than 20 actors
-# Display the following information about these shows in a table:
-# show the title, rating, year, genre, actor count
-# Page mustn't reload (so you have to do it with fetch)

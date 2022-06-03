@@ -1,0 +1,5 @@
+# Make main page’s links working:
+# they all should lead to a details page:
+# we can see a table of the show’s characters (character name, actor name, actor age)
+# JS: create a button below the table, when pressing this, the trailer should show in a new card
+# without a page reload.
