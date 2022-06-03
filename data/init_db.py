@@ -5,8 +5,7 @@ def init_db():
     # We need to connect to postgres db to be able to drop our db
     connection_data = get_connection_data('postgres')
     db_to_init = ensure_var('MY_PSQL_DBNAME')
-    print(
-        f'Running init with connection data: {connection_data} and initializing databae: {db_to_init}')
+    print(f'Running init with connection data: {connection_data} and initializing databae: {db_to_init}')
 
     with establish_connection(connection_data=connection_data) as conn:
         with conn.cursor() as cursor:
@@ -18,7 +17,7 @@ def init_db():
                 print(f"Database {db_to_init} is created")
             except Exception as ex:
                 print(f"Database creation failed: {db_to_init}")
-                raise (ex)
+                raise(ex)
 
 
 def create_schema():

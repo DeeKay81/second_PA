@@ -3,11 +3,12 @@ import os
 import sys
 
 import requests
-from dotenv import load_dotenv
 from psycopg2 import DataError
 
 import init_db
 from data_manager import execute_select, execute_dml_statement
+
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -22,11 +23,9 @@ TRAKT_MAX_SHOW_COUNT = 52500
 
 
 def should_use_trakt():
-    print(
-        "The program can try connecting to the TRAKT API to download data or use local data to insert instead (faster)?")
+    print("The program can try connecting to the TRAKT API to download data or use local data to insert instead (faster)?")
     answer = input("Do you want to connect to the TRAKT API? (y/n) ")
     return answer.lower() == "y"
-
 
 def main():
     # We don't have documentation for trakt, so students shouldn't be exposed to it
@@ -123,8 +122,7 @@ def insert_shows(limit=20, max_show_count=1000):
             insert_seasons_of_show(show['id'])
             insert_cast_of_show(show['id'])
 
-            progress_bar(total_counter + 1, max_show_count, prefix='Inserting shows:',
-                         suffix=show['title'])
+            progress_bar(total_counter + 1, max_show_count, prefix='Inserting shows:', suffix=show['title'])
             total_counter += 1
 
     clear_progress_bar('Inserted ' + str(len(inserted_ids)) + ' shows')
@@ -171,8 +169,7 @@ def insert_genres_of_show(genre_ids, show_entity):
 
 def insert_actor_of_show(show_id, actor):
     actor_id = actor['person']['ids']['trakt']
-    existing_actor = execute_select("SELECT id FROM actors WHERE id=%(actor_id)s",
-                                    {'actor_id': actor_id})
+    existing_actor = execute_select("SELECT id FROM actors WHERE id=%(actor_id)s", {'actor_id': actor_id})
 
     if len(existing_actor) == 0:
         execute_dml_statement("""

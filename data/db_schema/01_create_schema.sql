@@ -7,8 +7,7 @@ DROP TABLE IF EXISTS seasons;
 DROP TABLE IF EXISTS shows;
 
 
-CREATE TABLE shows
-(
+CREATE TABLE shows (
     id       INTEGER PRIMARY KEY NOT NULL,
     title    VARCHAR(200)        NOT NULL,
     year     DATE                NULL,
@@ -20,15 +19,13 @@ CREATE TABLE shows
 );
 
 
-CREATE TABLE genres
-(
+CREATE TABLE genres (
     id   SERIAL PRIMARY KEY NOT NULL,
     name VARCHAR(30)        NOT NULL
 );
 
 
-CREATE TABLE actors
-(
+CREATE TABLE actors (
     id        INTEGER PRIMARY KEY NOT NULL,
     name      VARCHAR(200)        NOT NULL,
     birthday  DATE,
@@ -37,8 +34,7 @@ CREATE TABLE actors
 );
 
 
-CREATE TABLE seasons
-(
+CREATE TABLE seasons (
     id            INTEGER PRIMARY KEY NOT NULL,
     season_number SMALLINT            NOT NULL,
     title         VARCHAR(200),
@@ -47,16 +43,14 @@ CREATE TABLE seasons
 );
 
 
-CREATE TABLE show_genres
-(
+CREATE TABLE show_genres (
     id       SERIAL PRIMARY KEY NOT NULL,
     show_id  INTEGER            NOT NULL,
     genre_id INTEGER            NOT NULL
 );
 
 
-CREATE TABLE show_characters
-(
+CREATE TABLE show_characters (
     id             SERIAL PRIMARY KEY NOT NULL,
     show_id        INTEGER            NOT NULL,
     actor_id       INTEGER            NOT NULL,
@@ -64,8 +58,7 @@ CREATE TABLE show_characters
 );
 
 
-CREATE TABLE episodes
-(
+CREATE TABLE episodes (
     id             INTEGER PRIMARY KEY NOT NULL,
     title          VARCHAR(200),
     episode_number SMALLINT            NOT NULL,
@@ -75,23 +68,23 @@ CREATE TABLE episodes
 
 
 ALTER TABLE ONLY seasons
-    ADD CONSTRAINT fk_seasons_show_id FOREIGN KEY (show_id) REFERENCES shows (id);
+    ADD CONSTRAINT fk_seasons_show_id FOREIGN KEY (show_id) REFERENCES shows(id);
 
 
 ALTER TABLE ONLY episodes
-    ADD CONSTRAINT fk_episodes_season_id FOREIGN KEY (season_id) REFERENCES seasons (id);
+    ADD CONSTRAINT fk_episodes_season_id FOREIGN KEY (season_id) REFERENCES seasons(id);
 
 
 ALTER TABLE ONLY show_characters
-    ADD CONSTRAINT fk_show_characters_actor_id FOREIGN KEY (actor_id) REFERENCES actors (id);
+    ADD CONSTRAINT fk_show_characters_actor_id FOREIGN KEY (actor_id) REFERENCES actors(id);
 
 
 ALTER TABLE ONLY show_characters
-    ADD CONSTRAINT fk_show_characters_show_id FOREIGN KEY (show_id) REFERENCES shows (id);
+    ADD CONSTRAINT fk_show_characters_show_id FOREIGN KEY (show_id) REFERENCES shows(id);
 
 
 ALTER TABLE ONLY show_genres
-    ADD CONSTRAINT fk_show_genres_genre_id FOREIGN KEY (genre_id) REFERENCES genres (id);
+    ADD CONSTRAINT fk_show_genres_genre_id FOREIGN KEY (genre_id) REFERENCES genres(id);
 
 ALTER TABLE ONLY show_genres
-    ADD CONSTRAINT fk_show_genres_show_id FOREIGN KEY (show_id) REFERENCES shows (id);
+    ADD CONSTRAINT fk_show_genres_show_id FOREIGN KEY (show_id) REFERENCES shows(id);

@@ -1,5 +1,5 @@
-{% extends 'layout.html' %}
-{% block title %}Registration{% endblock %}
+{% extends 'main/layout.html' %}
+{% block title %}Register{% endblock %}
 {% block head %}<h1 class="title text-center">Registration page</h1>{% endblock %}
 {% block nav %}
     <nav class="breadcrumb">
@@ -10,17 +10,5 @@
 {% endblock %}
 
 {% block content %}
-    <div class="card" style="text-align: center">
-        <form action="/register" method="POST">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" placeholder="your email">
-            <br>
-            <br>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="your password">
-            <br>
-            <br>
-            <button type="submit">Register</button>
-        </form>
-    </div>
+
 {% endblock %}
