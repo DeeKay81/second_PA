@@ -20,14 +20,19 @@ def design():
 
 
 # exercise one ------------------------------------------------------------------------------
-@app.route('/api/...')
-def get_():
-    return jsonify(queries.get_())
+@app.route('/api/get-genres/')
+def get_genres():
+    return jsonify(queries.get_genres())
 
 
-@app.route('/.../')
-def display_():
-    return render_template('_.html')
+@app.route('/api/get-genres-detail/<int:genre_id>')
+def get_genres_detail(genre_id):
+    return jsonify(queries.get_genres_detail(genre_id))
+
+
+@app.route('/genres/')
+def display_genres():
+    return render_template('genres.html')
 
 
 # authentication -----------------------------------------------------------------------------------
