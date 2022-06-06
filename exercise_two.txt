@@ -1,4 +1,8 @@
-# On a new page, the list shows (title, year, rating rounded to 3 decimal) with an odd number of
-# episodes from the "Mystery" or "Horror" genre. List them in alphabetical order by show the title.
-# The show overview should be loaded with the use of fetch API, when you click on a show title, the
-# overview should appear, when you click on the title again, it disappears.
+# On a new page, the list shows
+# (title, year, rating rounded to 3 decimal)
+# with an odd number of episodes
+# from the "Mystery" or "Horror" genre.
+# List them in alphabetical order by show the title.
+# The show overview should be loaded with the use of fetch API,
+# when you click on a show title, the overview should appear,
+# when you click on the title again, it disappears.

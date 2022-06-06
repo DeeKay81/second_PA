@@ -19,20 +19,17 @@ def design():
     return render_template('main/design.html')
 
 
-# exercise one ------------------------------------------------------------------------------
-@app.route('/api/get-genres/')
-def get_genres():
-    return jsonify(queries.get_genres())
+# exercise two ------------------------------------------------------------------------------
+@app.route('/api/get-shows/')
+def get_mystery_horror():
+    return jsonify(queries.get_mystery_horror())
 
 
-@app.route('/api/get-genres-detail/<int:genre_id>')
-def get_genres_detail(genre_id):
-    return jsonify(queries.get_genres_detail(genre_id))
-
-
-@app.route('/genres/')
-def display_genres():
-    return render_template('genres.html')
+@app.route('/mystery-horror/')
+def display_mystery_horror():
+    mystery_horror = queries.get_mystery_horror()
+    return render_template('mystery-horror.html',
+                           mystery_horror=mystery_horror)
 
 
 # authentication -----------------------------------------------------------------------------------

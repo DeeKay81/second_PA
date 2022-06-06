@@ -1,0 +1,26 @@
+{% extends 'main/layout.html' %}
+{% block title %}Mystery, Horror{% endblock %}
+{% block head %}<h1 class="title text-center">Mystery, Horror page</h1>{% endblock %}
+{% block nav %}
+    <nav class="breadcrumb">
+        <a href="/">Main</a>
+        <span class="separator">&gt;</span>
+        <a href="/mystery-horror/">Mystery, Horror</a>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <section>
+        <div class="card">
+            <div class="table">
+                <ol>
+
+                </ol>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block  script %}
+    <script type="module" src="/static/js/overview.js" defer></script>
+{% endblock %}

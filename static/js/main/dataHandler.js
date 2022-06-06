@@ -1,9 +1,6 @@
 export let dataHandler = {
-     getGenres: async function(){
-        return await apiGet('/api/get-genres/')
-    },
-    getGenresDetail: async function(genre_id){
-        return await apiGet(`/api/get-genres-detail/${genre_id}`)
+    getGenres: async function(){
+        return await apiGet(`/api/get-genres/`)
     }
 };
 
@@ -11,6 +8,7 @@ async function apiGet(url) {
     let response = await fetch(url, {
         method: "GET",
     });
+    // console.log(response.statusText);
     if (response.status === 200) {
         return response.json()
     }

@@ -19,20 +19,20 @@ def get_genres():
         """))
 
 
-def get_genres_detail(genre_id):
+def get_mystery_horror():
     return data_manager.execute_select(sql.SQL(
-        f"""
-        SELECT genres.id, genres.name AS genre,
+        """
+        SELECT shows.id,
         shows.title,
-        ROUND(shows.rating::numeric, 1) AS rating,
+        ARRAY_AGG(genres.name) AS genres,
         DATE_PART('year', shows.year::date) AS year,
-        COUNT(actors.name) AS actor_count
-        FROM genres
-            JOIN show_genres ON genres.id = show_genres.genre_id
-            JOIN shows ON shows.id = show_genres.show_id
-            JOIN show_characters ON shows.id = show_characters.show_id
-            JOIN actors ON actors.id = show_characters.actor_id
-        WHERE genres.id = {genre_id}
-        GROUP BY genres.id, shows.id
-        HAVING COUNT(actors.name) < 20;
-        """), {'genre_id': genre_id})
+        ROUND(shows.rating::numeric, 3) AS rating,
+        shows.overview
+        FROM show_genres
+            JOIN genres ON show_genres.genre_id = genres.id
+            JOIN shows ON show_genres.show_id = shows.id
+        WHERE genres.name = 'Mystery' OR genres.name = 'Horror'
+        GROUP BY shows.id, genres.name, shows.title
+        ORDER BY shows.title;
+        """
+    ))
