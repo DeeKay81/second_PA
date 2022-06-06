@@ -1,0 +1,41 @@
+{% extends 'main/layout.html' %}
+{% block title %}Detailed actors{% endblock %}
+{% block head %}<h1 class="title text-center">Detailed actors page</h1>{% endblock %}
+{% block nav %}
+    <nav class="breadcrumb">
+        <a href="/">Main</a>
+        <span class="separator">&gt;</span>
+        <a href="/tv-show/{{ show_id }}">Detailed actors</a>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <section>
+        <div class="card">
+            <table class="text-center">
+                <thead>
+                    <tr>
+                        <th>Character name</th>
+                        <th>Actor name</th>
+                        <th>Actor age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for detail in details %}
+                        <tr>
+                            <td>{{ detail.character_name }}</td>
+                            <td>{{ detail.actor_name }}</td>
+                            <td>{{ detail.age }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        <button id="{{ show_id }}" class="trailer">Show trailer</button>
+        </div>
+    <div class="card_trailer hidden"></div>
+    </section>
+{% endblock %}
+
+{% block  script %}
+    <script type="module" src="/static/js/trailer.js" defer></script>
+{% endblock %}

@@ -19,15 +19,18 @@ def design():
     return render_template('main/design.html')
 
 
-# exercise one ------------------------------------------------------------------------------
-@app.route('/api/...')
-def get_():
-    return jsonify(queries.get_())
+# exercise three ------------------------------------------------------------------------------
+@app.route('/api/get-trailer/<show_id>')
+def get_trailer(show_id):
+    return jsonify(queries.get_trailer(show_id))
 
 
-@app.route('/.../')
-def display_():
-    return render_template('_.html')
+@app.route('/tv-show/<int:show_id>')
+def display_details(show_id):
+    details = queries.get_details(show_id)
+    return render_template('list-character.html',
+                           details=details,
+                           show_id=show_id)
 
 
 # authentication -----------------------------------------------------------------------------------

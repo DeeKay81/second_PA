@@ -1,6 +1,6 @@
 export let dataHandler = {
-    get_: async function() {
-        return await apiGet(`/api/get-.../`);
+    getTrailer: async function(show_id) {
+        return await apiGet(`/api/get-trailer/${show_id}`);
     }
 };
 
