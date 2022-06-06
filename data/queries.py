@@ -19,9 +19,9 @@ def get_genres():
         """))
 
 
-def get_mystery_horror(show_id):
+def get_mystery_horror():
     return data_manager.execute_select(sql.SQL(
-        f"""
+        """
         SELECT shows.id,
         shows.title,
         ARRAY_AGG(genres.name) AS genres,
@@ -31,8 +31,7 @@ def get_mystery_horror(show_id):
         FROM show_genres
             JOIN genres ON show_genres.genre_id = genres.id
             JOIN shows ON show_genres.show_id = shows.id
-        WHERE genres.name = 'Mystery' OR genres.name = 'Horror' AND shows.id = {show_id}
+        WHERE genres.name = 'Mystery' OR genres.name = 'Horror'
         GROUP BY shows.id, genres.name, shows.title
         ORDER BY shows.title;
-        """
-    ).format(show_id=sql.Literal(show_id)), None, False)
+        """))

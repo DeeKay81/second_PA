@@ -18,26 +18,23 @@
                         <th>Title</th>
                         <th>Year</th>
                         <th>Rating</th>
-                        <th>Overview</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for detail in mystery_horror %}
                         <tr>
-                            <td>{{ detail.title }}</td>
+                            <td><a onclick="openOverview()">{{ detail.title }}</a>
+                                <ol class="hidden">
+                                    {{ detail.overview }}
+                                </ol>
+                            </td>
                             <td>{{ detail.year }}</td>
                             <td>{{ detail.rating }}</td>
-                            <td>
-                                <button id="{{ show_id }}" class="overview">Show Overview</button>
-                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
-    <div class="card_overview hidden">
-
-    </div>
     </section>
 {% endblock %}
 
