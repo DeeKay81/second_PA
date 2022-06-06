@@ -20,16 +20,17 @@ def design():
 
 
 # exercise two ------------------------------------------------------------------------------
-@app.route('/api/get-shows/')
-def get_mystery_horror():
-    return jsonify(queries.get_mystery_horror())
+@app.route('/api/get-overview/<show_id>')
+def get_overview(show_id):
+    return jsonify(queries.get_mystery_horror(show_id))
 
 
-@app.route('/mystery-horror/')
-def display_mystery_horror():
-    mystery_horror = queries.get_mystery_horror()
+@app.route('/mystery-horror/<int:show_id>')
+def display_mystery_horror(show_id):
+    mystery_horror = queries.get_mystery_horror(show_id)
     return render_template('mystery-horror.html',
-                           mystery_horror=mystery_horror)
+                           mystery_horror=mystery_horror,
+                           show_id=show_id)
 
 
 # authentication -----------------------------------------------------------------------------------

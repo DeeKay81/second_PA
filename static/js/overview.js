@@ -1,45 +1,14 @@
-import {dataHandler} from '/static/js/main/dataHandler.js';
+import {dataHandler} from "/static/js/main/dataHandler.js";
 
-function getActorData(){
-    return dataHandler.getActors();
-}
-
-let allData = await getActorData();
-
-async function getAllData() {
-    const card = document.querySelector('ol');
-    let actor = '';
-    allData.forEach(allData => {
-        actor = allData.firstname;
-        card.innerHTML += `<li class="firstname">${actor}</li>`;
-    })
-    document.querySelectorAll('.firstname').forEach( element => {
-        listShows(element);
-        element.addEventListener('click', event => {
-            let allElements = document.querySelectorAll('.firstname');
-            allElements.forEach(show => {
-                show.firstElementChild.classList.add('hidden');
-            })
-            let childElement = element.firstElementChild;
-            childElement.classList.toggle('hidden');
-        });
-
+async function showOverview(){
+    const btn = document.querySelector('.overview');
+    let show_id = btn.getAttribute('id');
+    const data = await dataHandler.getOverview(show_id);
+    btn.addEventListener('click', event =>{
+        const card = document.querySelector('.card_overview')
+        card.classList.toggle('hidden');
+        card.innerHTML = `<li src="${ data.overview }}"></li>`;
     });
 }
 
-function listShows(element) {
-    let name = element.innerText;
-    allData.forEach(allData => {
-        let firstName = allData.firstname;
-        if (firstName === name) {
-            element.innerHTML += `<ul class="shows hidden"></ul>`
-            allData.shows.forEach(show =>{
-                let listElement = document.createElement('li');
-                listElement.innerText = show;
-                element.firstElementChild.appendChild(listElement);
-            });
-        }
-    });
-}
-
-await getAllData();
+await showOverview();

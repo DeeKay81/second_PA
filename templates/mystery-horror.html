@@ -12,12 +12,32 @@
 {% block content %}
     <section>
         <div class="card">
-            <div class="table">
-                <ol>
-
-                </ol>
-            </div>
+            <table class="details card">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Year</th>
+                        <th>Rating</th>
+                        <th>Overview</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for detail in mystery_horror %}
+                        <tr>
+                            <td>{{ detail.title }}</td>
+                            <td>{{ detail.year }}</td>
+                            <td>{{ detail.rating }}</td>
+                            <td>
+                                <button id="{{ show_id }}" class="overview">Show Overview</button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
+    <div class="card_overview hidden">
+
+    </div>
     </section>
 {% endblock %}
 

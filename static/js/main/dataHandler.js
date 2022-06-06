@@ -1,6 +1,6 @@
 export let dataHandler = {
-    getGenres: async function(){
-        return await apiGet(`/api/get-genres/`)
+    getOverview: async function(show_id){
+        return await apiGet(`/api/get-overview/${show_id}`)
     }
 };
 
