@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>CsED</title>
+
+    <!-- Import Montserrat font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"/>
+
+    <!-- Normalize.css fixes lot of differences between browsers default styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css"/>
+
+    <!-- project wide styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/site.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/background.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/button.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/card.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/table.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/form.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/grid.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/utils.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/pa.2.2.css') }}">
+    <!-- page specific styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/detailed-view.css') }}">
+
+</head>
+
+<body>
+<div id="body-wrapper">
+    <header class="clearfix">
+        <img id="header-logo" src="{{ url_for('static', filename='assets/codecool-logo.png') }}" alt="Codecool Logo">
+        <span id="header-title" class="title">
+                        Codecool Series DB
+                    </span>
+        <div id="header-auth">
+            <button type="button" id="bt_register">Register</button>
+            <button type="button" id="bt_login">Login</button>
+        </div>
+    </header>
+    <section>
+        <h1 class="title text-center">PA-like</h1>
+        <div class="card">
+            <h2>What a year!</h2>
+            <p>SQL: List all years between 1970 and 2010. Add a column of average rating of all shows started that year.
+                Also add a column containing the number of shows started that year.</p>
+            <p>Jinja/Python: Display all years and their data as cards next to each other. There should be many of them
+                in a row. Display them like this plan:</p>
+            <p>CSS: Display as many fixed size cards as many fits in a line.</p>
+            <p>JS: Make a multiselect: On clicking on a card, change the background of that card, and display a rating
+                aggregation above the year cards. So when you selected 3 cards, display the average rating of these 3
+                cards in a paragraph. (add some text to it to make it user friendly)</p>
+        </div>
+        <div class="card">
+            <p>The average rating of the selected years: <span id="rating"></span></p>
+            <div class="box">
+                {% for year in years %}
+
+                        <card class="card format-card"><p> {{ year['year'].strftime('%Y') }}</p>
+                            <p class="avg-rating">{{ year['avg']|round(1) }}</p>
+                            <p>{{ year['count'] }}</p></card>
+
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <footer>
+        Copyright, bla-bla
+    </footer>
+</div>
+<div class="background">
+    <div class="dark-blue-layer"></div>
+    <div class="light-blue-layer"></div>
+</div>
+<script src="/static/js/pa.2.2.js" defer></script>
+</body>
+</html>

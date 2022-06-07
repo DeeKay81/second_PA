@@ -21,11 +21,6 @@ header > * {
     padding: 0 6px;
 }
 
-a#header-title:hover {
-    text-decoration: none;
-    color: #fff;
-}
-
 #header-auth {
     float: right;
 
