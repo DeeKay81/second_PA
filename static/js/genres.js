@@ -1,10 +1,6 @@
 import {dataHandler} from "/static/js/main/dataHandler.js";
 import {createTable} from "/static/js/genreDetail.js";
 
-function getGenresData(){
-    return dataHandler.getGenres();
-}
-
 let allData = await dataHandler.getGenres();
 
 async function getAllData() {
