@@ -19,7 +19,7 @@ def design():
     return render_template('main/design.html')
 
 
-# exercise three ------------------------------------------------------------------------------
+# exercise four ------------------------------------------------------------------------------
 @app.route('/api/get-trailer/<show_id>')
 def get_trailer(show_id):
     return jsonify(queries.get_trailer(show_id))
