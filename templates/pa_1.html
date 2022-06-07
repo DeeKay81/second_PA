@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +10,7 @@
     <!-- Import Montserrat font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <!-- Normalize.css fixes lot of differences between browsers default styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css"/>
 
@@ -25,11 +25,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style/form.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/grid.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/utils.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style/pa.1.1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/papractice.css') }}">
+    <script type="module" src="{{ url_for('static', filename='js/pa_1.js') }}" defer></script>
+
     <!-- page specific styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style/detailed-view.css') }}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/fontawesome.css"
-          integrity="sha384-u5J7JghGz0qUrmEsWzBQkfvc8nK3fUT7DCaQzNQ+q4oEXhGSx+P2OqjWsfIRB8QT" crossorigin="anonymous">
 
 </head>
 
@@ -37,48 +37,47 @@
 <div id="body-wrapper">
     <header class="clearfix">
         <img id="header-logo" src="{{ url_for('static', filename='assets/codecool-logo.png') }}" alt="Codecool Logo">
-        <span id="header-title" class="title">
-                        Codecool Series DB
-                    </span>
+        <span id="header-title" class="title">Codecool Series DB</span>
         <div id="header-auth">
-            <button type="button" id="bt_register">Register</button>
-            <button type="button" id="bt_login">Login</button>
+            <button type="button" id="bt-register">Register</button>
+            <button type="button" id="bt-login">Login</button>
         </div>
     </header>
     <section>
-        <h1 class="title text-center"> Entry level (KATAs)</h1>
+        <h1 class="title text-center">Welcome page</h1>
         <div class="card">
-            <h2>First exercise</h2>
-            <p>SQL: List all shows and the number of episodes for each show.</p>
-            <p>JS: On page load, add a light green background to shows with an even number of episodes and light blue for odds.</p>
-            <p>CSS: Use CSS classes for the backgrounds.</p>
-            <p>Python: Add an extra  is_long key to all shows, which is true if the show contains at least 100 episodes.</p>
-            <p>Jinja: Show the fa-expand Font Awesome icon when the is_long key is true, or fa-compress icon when it’s false.</p>
+            <h2>Welcome TV show lovers!</h2>
+            <p>This great site is happy to bring you your favourite TV show's <i>details</i>.</p>
+            <p></p>
+            <p>Okay, actually this is a designed dumb page without any logic.</p>
+            <p>You can find a navigational element, the so called "breadcrumb" above the page's title. Use it for
+                in-depth
+                navigation.
+            </p>
         </div>
         <div class="card">
-            <table>
-                <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Episodes</th>
-                    <th>Is long</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for show in shows %}
-                    <tr>
-                        <td><a href="/show/{{ show['id'] }}">{{ show['title'] }}</a></td>
-                        <td class="episodes">{{ show['count'] }}</td>
+            <form method="post">
+                <label for="genre">Enter genre: </label>
+                <input type="text" required id="genre" name="genre">
+                <button type="submit">Search</button>
+            </form>
 
-                        {% if show['is_long'] %}
-                            <td><i class="fa fa-expand"></i></td>
-                        {% else %}
-                            <td><i class="fa fa-compress"></i></td>
-                        {% endif %}
-                    </tr>
+            {% if data != None %}
+                {% for item in data %}
+                    <ol id="{{ item['title'] }}">
+                        <li>Title: {{ item['title'] }}</li>
+                        <li>Starting date: {{ item['year'] }}</li>
+                        <li> Rating:
+                            {% for i in range(item['rating']) %}
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            {% endfor %}
+                            {% for i in range(10 - item['rating']) %}
+                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                            {% endfor %}
+                        </li>
+                    </ol>
                 {% endfor %}
-                </tbody>
-            </table>
+            {% endif %}
         </div>
     </section>
     <footer>
@@ -89,6 +88,5 @@
     <div class="dark-blue-layer"></div>
     <div class="light-blue-layer"></div>
 </div>
-<script src="/static/js/pa.1.1.js" defer></script>
 </body>
 </html>
